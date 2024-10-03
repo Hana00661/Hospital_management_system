@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
+from django.contrib.messages import constants as messages
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -31,16 +32,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin', #jazzmin is a populare django admin them, i added it here to override the default admin
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'mainapp',
-    'doctorapp',
-    'patientapp',
-    'userauthapp',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +57,7 @@ ROOT_URLCONF = 'HMS_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -121,7 +120,82 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGIN_URL = 'userauthapp:sign-in'
+LOGIN_REDIRECT_URL = 'userauthapp:sign-in'
+
+LOGOUT_REDIRECT_URL = '/'
+
+AUTH_USER_MODEL = 'userauthapp.User'
+
+MESSAGE_TAGS = {  # for bootstrap 5 to understand the messages from django
+    messages.ERROR: 'alert-danger',
+}
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+JAZZMIN_SETTINGS = {       #take a look for more info in the jazzmin website https://django-jazzmin.readthedocs.io/configuration/
+    'site_brand': "ClinicHub",
+    'copyright':  "All Right Reserved 2024",
+    "welcome_sign": "Welcome to ClinicHub, Login Now.",
+
+    "order_with_respect_to": [
+        "base",
+    ],
+
+    "icons": {
+        "admin.LogEntry": "fas fa-file",
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+    },
+    "show_ui_builder": True
+}
+
+JAZZMIN_UI_TWEAKS = {           # them them that i take from the jazzmin admin theme
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": True,
+    "brand_small_text": False,
+    "brand_colour": "navbar-secondary",
+    "accent": "accent-info",
+    "navbar": "navbar-info navbar-dark",
+    "no_navbar_border": False,
+    "navbar_fixed": False,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-dark-info",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": True,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "default",
+    "dark_mode_theme": None,
+    "button_classes": {
+        "primary": "btn-outline-primary",
+        "secondary": "btn-outline-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    }
+}
