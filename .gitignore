@@ -1,2 +1,13 @@
 __pycach__/*
 __pycach__
+*.pyc
+*.pyo
+.pytest_cache
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Miscellaneous
+*.swp
