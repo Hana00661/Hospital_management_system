@@ -13,6 +13,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
+
+from environs import Env
+
+env = Env()            #initializing environment variables
+env.read_env()         #reading the environment variables
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -40,6 +46,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    'mainapp',
+    'doctorapp',
+    'patientapp',
+    'userauthapp',
+    
 ]
 
 MIDDLEWARE = [
@@ -131,16 +143,19 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = 'userauthapp:sign-in'
-LOGIN_REDIRECT_URL = 'userauthapp:sign-in'
+LOGIN_REDIRECT_URL = ''
 
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = 'userauthapp:sign-in'
 
 AUTH_USER_MODEL = 'userauthapp.User'
 
+
+# Alert Messages
 MESSAGE_TAGS = {  # for bootstrap 5 to understand the messages from django
     messages.ERROR: 'alert-danger',
 }
 
+# Bootstrap Configs
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
@@ -152,9 +167,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 JAZZMIN_SETTINGS = {       #take a look for more info in the jazzmin website https://django-jazzmin.readthedocs.io/configuration/
-    'site_brand': "ClinicHub",
+    'site_brand': "VClinic",
     'copyright':  "All Right Reserved 2024",
-    "welcome_sign": "Welcome to ClinicHub, Login Now.",
+    "welcome_sign": "Welcome to Our VClinic, Login Now.",
 
     "order_with_respect_to": [
         "base",

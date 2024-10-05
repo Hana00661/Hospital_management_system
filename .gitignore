@@ -11,3 +11,6 @@ env/
 
 # Miscellaneous
 *.swp
+
+# ignore sqlite files
+*.db
