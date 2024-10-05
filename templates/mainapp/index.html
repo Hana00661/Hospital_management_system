@@ -1,0 +1,70 @@
+{% extends 'partials/base.html' %} {% block content %}
+<section class="container">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-12 col-lg-7 p-4 rounded-3 bg-white">
+            <h1 class="display-4 fw-bold mt-5">
+                <span class="text-primary"><b> Compassionate </b></span> Healthcare. Your Health, <span class="text-primary">Our Priority.</span>
+            </h1>
+            <p class="fs-4 mt-4">From diagnosis to recovery, cutting-edge treatments. We’re dedicated to delivering healthcare that prioritizes you and your family’s well-being, and more.</p>
+            <div class="d-flex align-items-center gap-2 mt-5">
+                <button class="btn btn-primary btn-lg">Create Account <i class="fas fa-user-plus ms-1"></i></button>
+                <button class="btn btn-outline-primary btn-lg">Book Appointment <i class="fas fa-arrow-right ms-2"></i></button>
+            </div>
+        </div>
+        <div class="col-12 col-lg-5">
+            <img class="img-fluid mt-4" style="width: 100%; height: 350px; object-fit: cover; border-radius: 10px" src="https://www.sermo.com/wp-content/uploads/2022/05/doctor-patient-img-1-copy-3.png" alt="" />
+        </div>
+    </div>
+</section>
+
+<section class="container mt-5">
+    <div class="py-4">
+        <h2 class="">Clinical Specialities</h2>
+        <p>Multiple Departments Of Clinical Specialties With The Latest Medical Equipment And The Best Laboratories. All Details Are Available</p>
+    </div>
+    <div class="row">
+        {% for s in services %}
+        <div class="col-lg-3">
+            <div class="card mb-4 shadow">
+                <a href="{% url 'mainapp:service_detail' s.id %}">
+                    {% if s.image %}
+                        <img src="{{ s.image.url }}" alt="service" style="height: 200px; object-fit: cover" class="card-img-top" />
+                    {% else %}
+                        <img src="/static/images/default-image.jpg" alt="default service image" style="height: 200px; object-fit: cover" class="card-img-top" />
+                    {% endif %}
+                </a>
+                <div class="card-body">
+                    <h4 class="mb-2 text-truncate-line-2"><a href="{% url 'mainapp:service_detail' s.id %}" class="text-inherit text-dark text-decoration-none">{{s.name}}</a></h4>
+                    <p>{{s.description|truncatechars:40}}</p>
+                    <div class="mt-2">
+                        <span class="fw-semibold">Doctors Available: {{s.available_doctors.all.count}}</span>
+                        <div class="lh-1 mt-3">
+                            <span class="text-dark fw-bold fs-4">${{s.cost}}</span>
+                        </div>
+                        <a href="{% url 'mainapp:service_detail' s.id %}" class="btn btn-sm btn-primary mt-3">Book Appointment <i class="fas fa-arrow-right ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="container mt-5">
+    <div class="row d-flex align-items-center">
+        <div class="col-lg-6">
+            <h1 class="fw-bold">Get Appointment Now!</h1>
+            <p class="text-secondary"> Schedule Your Appointment Today, And Start Your Healthcare Journey With Us. Because Our Experience Is Different!.</p>
+
+            <div class="d-flex align-items-center gap-2 mt-5">
+                <button class="btn btn-outline-primary"><i class="fas fa-video ms-1"></i> View Specialities</button>
+                <button class="btn btn-primary">Create Account <i class="fas fa-user-plus ms-1"></i></button>
+                <button class="btn btn-primary">Learn More <i class="fas fa-arrow-right ms-1"></i></button>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <img src="https://www.nurseregistry.com/wp-content/uploads/2023/07/senior-in-home-nurse-care.jpg" class="img-fluid rounded" style="height: 400px" alt="" />
+        </div>
+    </div>
+</section>
+{% endblock content %}
