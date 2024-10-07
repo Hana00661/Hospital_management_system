@@ -14,3 +14,13 @@ env/
 
 # ignore sqlite files
 *.db
+
+# ignore image files
+*.jpg
+*.png
+*.gif
+*.svg
+*.jpeg
+*.ico
+*.webp
+*.avif

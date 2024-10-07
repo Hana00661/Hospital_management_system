@@ -3,7 +3,6 @@
     <div class="container">
         <div class="row mt-0 mt-md-4">
             {% include 'patientapp/sidebar.html' %}
-
             <div class="col-lg-9 col-md-8 col-12">
                 <h4 class="mb-0 mb-4 fw-bold">Profile</h4>
                 <form class="row" method="POST" enctype="multipart/form-data">
@@ -33,7 +32,7 @@
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label class="form-label">Date of birth</label>
-                        <input type="date" name="dob" value="{{formatted_dob}}" class="form-control" />
+                        <input type="date" name="date_of_birth" value="{{formatted_dob}}" class="form-control" />
                     </div>
                     <div class="col-lg-6 mb-3">
                         <label class="form-label">Blood Group</label>

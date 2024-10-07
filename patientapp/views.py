@@ -52,9 +52,6 @@ def appointment_detail(request, appointment_id):
 
     return render(request, "patientapp/appointment_detail.html", context)
 
-
-
-
 @login_required
 def cancel_appointment(request, appointment_id):
     patient = patient_models.Patient.objects.get(user=request.user)
@@ -90,6 +87,16 @@ def complete_appointment(request, appointment_id):
     messages.success(request, "Appointment Completed Successfully")
     return redirect("patientapp:appointment_detail", appointment.appointment_id)
 
+@login_required
+def payments(request):
+    patient = patient_models.Patient.objects.get(user=request.user)
+    payments = base_models.Billing.objects.filter(appointment__patient=patient, status="Paid")
+
+    context = {
+        "payments": payments,
+    }
+
+    return render(request, "patientapp/payments.html", context)
 
 @login_required
 def notifications(request):
@@ -116,7 +123,11 @@ def mark_noti_seen(request, id):
 @login_required
 def profile(request):
     patient = patient_models.Patient.objects.get(user=request.user)
-    formatted_dob = patient.dob.strftime('%Y-%m-%d')
+    # Check if date_of_birth exists before formatting it
+    if patient.date_of_birth:
+        formatted_dob = patient.date_of_birth.strftime('%Y-%m-%d')
+    else:
+        formatted_dob = ''  # Leave it empty if there's no date of birth
     
     if request.method == "POST":
         full_name = request.POST.get("full_name")
@@ -124,7 +135,7 @@ def profile(request):
         mobile = request.POST.get("mobile")
         address = request.POST.get("address")
         gender = request.POST.get("gender")
-        date_of_birth = request.POST.get("dob")
+        date_of_birth = request.POST.get("date_of_birth")
         blood_group = request.POST.get("blood_group")
 
         patient.full_name = full_name
@@ -134,7 +145,7 @@ def profile(request):
         patient.date_of_birth = date_of_birth
         patient.blood_group = blood_group
 
-        if image != None:
+        if image:
             patient.image = image
 
         patient.save()

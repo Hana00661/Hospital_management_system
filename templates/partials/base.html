@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -42,6 +43,7 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="{% url 'doctorapp:dashboard' %}">Dashboard</a></li>
                                     <li><a class="dropdown-item" href="{% url 'doctorapp:appointments' %}">Appointments</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'doctorapp:payments' %}">Payments</a></li>
                                     <li><a class="dropdown-item" href="{% url 'doctorapp:notifications' %}">Notifications</a></li>
                                     <li><a class="dropdown-item" href="{% url 'doctorapp:profile' %}">Profile</a></li>
                                 </ul>
@@ -52,6 +54,7 @@
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="{% url 'patientapp:dashboard' %}">Dashboard</a></li>
                                     <li><a class="dropdown-item" href="{% url 'patientapp:appointments' %}">Appointments</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'patientapp:payments' %}">Payments</a></li>
                                     <li><a class="dropdown-item" href="{% url 'patientapp:notifications' %}">Notifications</a></li>
                                     <li><a class="dropdown-item" href="{% url 'patientapp:profile' %}">Profile</a></li>
                                 </ul>
