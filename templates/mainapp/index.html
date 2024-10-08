@@ -7,8 +7,8 @@
             </h1>
             <p class="fs-4 mt-4">From diagnosis to recovery, cutting-edge treatments. We’re dedicated to delivering healthcare that prioritizes you and your family’s well-being, and more.</p>
             <div class="d-flex align-items-center gap-2 mt-5">
-                <button class="btn btn-primary btn-lg">Create Account <i class="fas fa-user-plus ms-1"></i></button>
-                <button class="btn btn-outline-primary btn-lg">Book Appointment <i class="fas fa-arrow-right ms-2"></i></button>
+                <a class="btn btn-primary btn-lg" href="{% url 'userauthapp:sign-up' %}">Create Account <i class="fas fa-user-plus ms-1"></i></a>
+                <a class="btn btn-outline-primary btn-lg" href="#services"> Appointment <i class="fas fa-arrow-right ms-2"></i></a>
             </div>
         </div>
         <div class="col-12 col-lg-5">
@@ -22,7 +22,7 @@
         <h2 class="">Clinical Specialities</h2>
         <p>Multiple Departments Of Clinical Specialties With The Latest Medical Equipment And The Best Laboratories. All Details Are Available</p>
     </div>
-    <div class="row">
+    <div id="services" class="row">
         {% for s in services %}
         <div class="col-lg-3">
             <div class="card mb-4 shadow">
@@ -57,9 +57,9 @@
             <p class="text-secondary"> Schedule Your Appointment Today, And Start Your Healthcare Journey With Us. Because Our Experience Is Different!.</p>
 
             <div class="d-flex align-items-center gap-2 mt-5">
-                <button class="btn btn-outline-primary"><i class="fas fa-video ms-1"></i> View Specialities</button>
-                <button class="btn btn-primary">Create Account <i class="fas fa-user-plus ms-1"></i></button>
-                <button class="btn btn-primary">Learn More <i class="fas fa-arrow-right ms-1"></i></button>
+                <a class="btn btn-outline-primary" href="#services"><i class="fas fa-video ms-1"></i> View Specialities</a>
+                <a class="btn btn-primary" href="{% url 'userauthapp:sign-up' %}">Create Account <i class="fas fa-user-plus ms-1"></i></a>
+                <a class="btn btn-primary" href="{% url 'mainapp:about' %}">Learn More <i class="fas fa-arrow-right ms-1"></i></a>
             </div>
         </div>
         <div class="col-lg-6">
