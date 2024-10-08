@@ -3,6 +3,7 @@ __pycach__
 *.pyc
 *.pyo
 .pytest_cache
+*__init__.cpython
 
 # Virtual environment
 venv/
@@ -16,11 +17,12 @@ env/
 *.db
 
 # ignore image files
-*.jpg
-*.png
-*.gif
-*.svg
-*.jpeg
-*.ico
-*.webp
-*.avif
+# *.jpg
+# *.png
+# *.gif
+# *.svg
+# *.jpeg
+# *.ico
+# *.webp
+# *.avif
+
