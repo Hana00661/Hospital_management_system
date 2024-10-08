@@ -70,10 +70,10 @@
                                     <td>{{a.doctor.full_name}}</td>
                                     <td>{{a.issues}}</td>
                                     <td>{{a.appointment_date}}</td>
-                                    <td>{{a.status}}</td>
+                                    <td>{{a.appointment_status}}</td>
                                     <td>
-                                        <a href="" class="btn btn-secondary btn-sm"> <i class="fas fa-eye"></i></a>
-                                        <a href="" class="btn btn-danger btn-sm">Cancel Appointment <i class="fas fa-trash ms-2"></i></a>
+                                        <a href="{% url 'patientapp:appointment_detail' a.appointment_id %}" class="btn btn-secondary btn-sm"> <i class="fas fa-eye"></i></a>
+                                        <a href="{% url 'patientapp:cancel_appointment' a.appointment_id %}" class="btn btn-danger btn-sm">Cancel Appointment <i class="fas fa-trash ms-2"></i></a>
                                     </td>
                                 </tr>
                                 {% endfor %}
