@@ -37,6 +37,8 @@ def register_view(request):
 
             else:
                 messages.error(request, "Authenticated failed, please try again!")
+        else:
+            messages.error(request, form.errors)
 
     else:
         form = userauths_forms.UserRegisterForm()
