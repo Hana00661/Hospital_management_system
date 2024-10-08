@@ -21,6 +21,14 @@ def index(request):
     }
     return render(request, "mainapp/index.html", context)
 
+def about_us(request):
+    """render about us page"""
+    return render(request, "mainapp/pages/about.html")
+
+def contact(request):
+    """rendr conntact page"""
+    return render(request, "mainapp/pages/contact.html")
+
 def service_detail(request, service_id):
     service = base_models.Service.objects.get(id=service_id)    #acquire service from the database, use get because it get just one item
 
