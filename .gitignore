@@ -1,0 +1,14 @@
+*.cpython-310.pyc
+__pycache__/*
+# *.py[cod]
+*pyc
+*.pyo
+
+# miscellaneous
+*swp
+
+# virtualenv
+venv/
+.venv/
+env/
+
