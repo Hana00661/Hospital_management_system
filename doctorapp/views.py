@@ -226,7 +226,7 @@ def profile(request):
         mobile = request.POST.get("mobile")
         country = request.POST.get("country")
         bio = request.POST.get("bio")
-        specializations = request.POST.get("specialization")
+        specializations = request.POST.get("specializations")
         qualifications = request.POST.get("qualifications")
         years_of_experience = request.POST.get("years_of_experience")
         next_available_appointment_date = request.POST.get("next_available_appointment_date")
@@ -243,7 +243,15 @@ def profile(request):
         if image != None:
             doctor.image = image
 
-        doctor.save()
+        if specializations:
+            try:
+                service = base_models.Service.objects.get(name=specializations)
+                doctor.save()
+                service.available_doctors.add(doctor)
+            except:
+                messages.error(request, f"{specializations} service doesn,t existe")
+                return redirect("doctorapp:profile")
+
         messages.success(request, "Profile updated successfully")
         return redirect("doctorapp:profile")
 
