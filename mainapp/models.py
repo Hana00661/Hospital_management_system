@@ -28,7 +28,7 @@ class Appointment(models.Model):
     issues = models.TextField(blank=True, null=True)
     symptoms = models.TextField(blank=True, null=True)
     appointment_id = ShortUUIDField(length=6, max_length=10, alphabet="1234567890")
-    appointment_status = models.CharField(max_length=120, choices=STATUS)
+    appointment_status = models.CharField(max_length=120, choices=STATUS, default='Pending')
 
     def __str__(self):
         return f"{self.patient.full_name} with {self.doctor.full_name}"
