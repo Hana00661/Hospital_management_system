@@ -263,4 +263,4 @@ def payment_status(request, billing_id):
         "billing": billing,
         "payment_status": payment_status,
     }
-    return render(request, "mainapp/checkout.html", context)
+    return render(request, "mainapp/payment_status.html", context)

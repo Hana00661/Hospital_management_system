@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'patientapp',
     'userauthapp',
     
+    'anymail',
+    
 ]
 
 MIDDLEWARE = [
@@ -173,7 +175,20 @@ PAYPAL_SECRET_ID = env('PAYPAL_SECRET_ID')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Email Configs
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
+ANYMAIL = {
+    "MAILGUN_API_KEY": os.environ.get("MAILGUN_API_KEY"),
+    "MAILGUN_SENDER_DOMAIN": os.environ.get("MAILGUN_SENDER_DOMAIN"),
+}
+
+FROM_EMAIL = env('FROM_EMAIL')
+EMAIL_BACKEND = env('EMAIL_BACKEND')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
+SERVER_EMAIL = env('SERVER_EMAIL')
+
+# Jazzmin Configs
 JAZZMIN_SETTINGS = {       #take a look for more info in the jazzmin website https://django-jazzmin.readthedocs.io/configuration/
     'site_brand': "VClinic",
     'copyright':  "All Right Reserved 2024",
