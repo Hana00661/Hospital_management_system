@@ -123,8 +123,8 @@ def stripe_payment(request, billing_id):
             }
         ],
         mode='payment',
-        success_url = request.build_absolute_url(reverse("mainapp:stripe_payment_verify", args=[billing.billing_id])) + "?session_id={CHECKOUT_SESSION_ID}",
-        cancel_url=request.build_absolute_url(reverse("mainapp:stripe_payment_verify", args=[billing.billing_id])) + "?session_id={CHECKOUT_SESSION_ID}"
+        success_url = request.build_absolute_uri(reverse("mainapp:stripe_payment_verify", args=[billing.billing_id])) + "?session_id={CHECKOUT_SESSION_ID}",
+        cancel_url=request.build_absolute_uri(reverse("mainapp:stripe_payment_verify", args=[billing.billing_id])) + "?session_id={CHECKOUT_SESSION_ID}"
         
     )
     return JsonResponse({"sessionId": checkout_session.id})     #sessionId is the id of the session that will help us open up a strips hosted pyament page
