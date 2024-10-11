@@ -215,7 +215,7 @@ def paypal_payment_verify(request, billing_id):
                 }
 
                 # Send appointment email to doctor
-                subject = "New Appointment"
+                subject = "Hey Doctor, You have a New Appointment"
                 text_body = render_to_string("email/new_appointment.txt", merge_data)
                 html_body = render_to_string("email/new_appointment.html", merge_data)
 
@@ -231,7 +231,7 @@ def paypal_payment_verify(request, billing_id):
                     msg.send()
 
                     # Send appointment booked email to patient
-                    subject = "Appointment Booked Successfully"
+                    subject = "Appointment Booked Successfully!!"
                     text_body = render_to_string("email/appointment_booked.txt", merge_data)
                     html_body = render_to_string("email/appointment_booked.html", merge_data)
 

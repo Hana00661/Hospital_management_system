@@ -63,18 +63,18 @@
     </head>
     <body>
         <div class="email-container">
-            <h1>Hello {{billing.appointment.doctor.full_name}}</h1>
+            <h1>Hey {{billing.appointment.doctor.full_name}}</h1>
             <p>You have a new appointment with {{billing.appointment.patient.full_name}}</p>
 
             <div class="info-section">
-                <h3><b>Service and Issues</b></h3>
+                <h3><b>Clinical Specialities:</b></h3>
                 <p><b>Service:</b> {{ billing.appointment.service.name }}</p>
                 <p><b>Issues:</b> {{ billing.appointment.issues }}</p>
                 <p><b>Symptoms:</b> {{ billing.appointment.symptoms }}</p>
             </div>
 
             <div class="info-section">
-                <h3><b>Patient Bio Data</b></h3>
+                <h3><b>Patient Bio Data:</b></h3>
                 <p><b>Full Name:</b> Dr. {{billing.appointment.patient.full_name}}</p>
                 <p><b>Email:</b> {{billing.appointment.patient.email}}</p>
                 <p><b>Issues:</b> {{billing.appointment.issues}}</p>
@@ -82,20 +82,20 @@
             </div>
 
             <div class="info-section">
-                <h3><b>Appointment Details</b></h3>
+                <h3><b>Appointment Details:</b></h3>
                 <p><b>Appointment Date:</b> {{billing.appointment.appointment_date}}</p>
                 <p><b>Appointment Status:</b> {{billing.appointment.status}}</p>
                 <p><b>Appointment ID:</b> {{billing.appointment.appointment_id}}</p>
             </div>
 
             <div class="info-section">
-                <h3><b>Billing Details</b></h3>
+                <h3><b>Billing Details:</b></h3>
                 <p><b>Billing ID:</b> {{billing.billing_id}}</p>
                 <p><b>Price:</b> ${{billing.sub_total}}</p>
                 <p><b>Status:</b> {{billing.status}}</p>
             </div>
 
-            <p class="footer-text">Thanks for your booking, your health is our priority.</p>
+            <!-- <p class="footer-text">Thanks for your booking, your health is our priority.</p> -->
         </div>
     </body>
 </html>

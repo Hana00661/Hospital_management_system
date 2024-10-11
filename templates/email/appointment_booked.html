@@ -67,27 +67,27 @@
             <p>Your appointment with Dr. {{billing.appointment.doctor.full_name}} was successfully scheduled</p>
 
             <div class="info-section">
-                <h3><b>Service and Issues</b></h3>
+                <h3><b>Clinical Specialities That You Choosed:</b></h3>
                 <p><b>Service:</b> {{ billing.appointment.service.name }}</p>
                 <p><b>Issues:</b> {{ billing.appointment.issues }}</p>
                 <p><b>Symptoms:</b> {{ billing.appointment.symptoms }}</p>
             </div>
 
             <div class="info-section">
-                <h3><b>Doctor Bio Data</b></h3>
+                <h3><b>Doctor Bio Data:</b></h3>
                 <p><b>Full Name:</b> Dr.  {{billing.appointment.doctor.full_name}}</p>
                 <p><b>Email:</b>  {{billing.appointment.doctor.user.email}}</p>
             </div>
 
             <div class="info-section">
-                <h3><b>Appointment Details</b></h3>
+                <h3><b>Appointment Details:</b></h3>
                 <p><b>Appointment Date:</b> {{billing.appointment.appointment_date}}</p>
                 <p><b>Appointment Status:</b> {{billing.appointment.status}}</p>
                 <p><b>Appointment ID:</b> {{billing.appointment.appointment_id}}</p>
             </div>
 
             <div class="info-section">
-                <h3><b>Billing Details</b></h3>
+                <h3><b>Billing Details:</b></h3>
                 <p><b>Billing ID:</b> {{billing.billing_id}}</p>
                 <p><b>Price:</b> ${{billing.sub_total}}</p>
                 <p><b>Status:</b> {{billing.status}}</p>
