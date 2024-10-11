@@ -29,18 +29,20 @@
                                 <a class="nav-link active" aria-current="page" href="/">Home</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Clinical Specialities </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    
-                                    {% for s in services %}
-                                        <li><a class="dropdown-item" href="{% url 'mainapp:service_detail' s.id %}">{{s.name}} </a></li>
-                                    {% endfor %}
-                                        
-                                </ul>
+                                <a class="nav-link text-white" href="/#services" id="navbarDropdown" role="button" aria-expanded="false"> Clinical Specialities </a>
                             </li>
-
+                            <li class="nav-item">
+                                {% if request.user.user_type == "Doctor" %}
+                                <a class="nav-link text-white" href="{% url 'doctorapp:dashboard' %}" aria-expanded="false">Account </a>
+                                {% elif request.user.user_type == "Patient" %}
+                                <a class="nav-link text-white" href="{% url 'patientapp:dashboard' %}" aria-expanded="false">Account </a>
+                                {% else %}
+                                <a class="nav-link text-white" href="/admin" aria-expanded="false">Account </a>
+                                {% endif %}
+                            </li>
+<!--                        
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Doctor </a>
+                                <a class="nav-link text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Doctor </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="{% url 'doctorapp:dashboard' %}">Dashboard</a></li>
                                     <li><a class="dropdown-item" href="{% url 'doctorapp:appointments' %}">Appointments</a></li>
@@ -59,14 +61,13 @@
                                     <li><a class="dropdown-item" href="{% url 'patientapp:notifications' %}">Notifications</a></li>
                                     <li><a class="dropdown-item" href="{% url 'patientapp:profile' %}">Profile</a></li>
                                 </ul>
-                            </li>
+                            </li> -->
 
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> More </a>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" href="{% url 'mainapp:about' %}">About Us</a></li>
-                                    <li><a class="dropdown-item" href="{% url 'mainapp:contact' %}">Contact Us</a></li>
-                                </ul>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{% url 'mainapp:about' %}">About Us</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{% url 'mainapp:contact' %}">Contact Us</a>
                             </li>
                         </ul>
                     </div>
