@@ -55,7 +55,7 @@ def cancel_appointment(request, appointment_id):
     doctor = doctor_models.Doctor.objects.get(user=request.user)
     appointment = base_models.Appointment.objects.get(appointment_id=appointment_id, doctor=doctor)
 
-    appointment.status = "Cancelled"
+    appointment.appointment_status = "Cancelled"
     appointment.save()
 
     messages.success(request, "Appointment Cancelled Successfully")
