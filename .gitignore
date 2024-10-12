@@ -12,7 +12,7 @@ buckup/*
 venv/
 .venv/
 env/
-# .env
+.env
 
 # IDDE
 .vscode/
