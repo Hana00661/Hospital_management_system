@@ -23,8 +23,8 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <div class="mx-auto">
-                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <div class="ms-auto" id="content">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="nav-list">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="/">Home</a>
                             </li>
@@ -32,7 +32,9 @@
                                 <a class="nav-link text-white" href="/#services" id="navbarDropdown" role="button" aria-expanded="false"> Clinical Specialities </a>
                             </li>
                             <li class="nav-item">
-                                {% if request.user.user_type == "Doctor" %}
+                                {% if not request.user.is_authenticated %}
+                                <a class="nav-link text-white" href="{% url 'userauthapp:sign-in' %}" aria-expanded="false">Account </a>
+                                {% elif request.user.user_type == "Doctor" %}
                                 <a class="nav-link text-white" href="{% url 'doctorapp:dashboard' %}" aria-expanded="false">Account </a>
                                 {% elif request.user.user_type == "Patient" %}
                                 <a class="nav-link text-white" href="{% url 'patientapp:dashboard' %}" aria-expanded="false">Account </a>
