@@ -153,6 +153,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## Contact
 
-For any inquiries or support, please contact. Thank you for using Car Marketplace!
+For any inquiries or support, please contact:
 
-Thank you for using the Hospital Management System! We hope it helps streamline healthcare management effectively .
+[eng.hana95@gmail.com](mailto:eng.hana95@gmail.com)
+
+Thank you for using the Hospital Management System (VClinic)! We hope it helps streamline healthcare management effectively.
