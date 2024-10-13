@@ -155,7 +155,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 For any inquiries or support, please contact:
 
-- Ahmed Altaif [ahmedaltaif79@gmail.com]
+- Ahmed Altaif [ahmedaltaif79@gmail.com](mailto:ahmedaltaif79@gmail.com)
 - Hana Abdalhag [eng.hana95@gmail.com](mailto:eng.hana95@gmail.com)
 - Omar Algassim [omarggg2@gmail.com](mailto:omarggg2@gmail.com)
 
