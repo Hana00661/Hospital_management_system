@@ -157,6 +157,6 @@ For any inquiries or support, please contact:
 
 - Ahmed Altaif [ahmedaltaif79@gmail.com]
 - Hana Abdalhag [eng.hana95@gmail.com](mailto:eng.hana95@gmail.com)
-- Omar Algassim [omarggg2@gmail.com]
+- Omar Algassim [omarggg2@gmail.com](mailto:omarggg2@gmail.com)
 
 Thank you for using the Hospital Management System (VClinic)! We hope it helps streamline healthcare management effectively.
