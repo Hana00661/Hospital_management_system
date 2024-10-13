@@ -113,6 +113,10 @@ python manage.py runserver
 
 Visit <http://127.0.0.1:8000/> to view the website. Media Files The project handles car images. Ensure you have a media/ directory for image uploads. If you encounter issues, adjust the MEDIA_URL and MEDIA_ROOT in your settings.py. Features to Add Search and filter functionality for car listings. User reviews and ratings for sellers. Integration with a payment gateway for online transactions.
 
+### Access the admin interface
+
+Visit <http://127.0.0.1:8000/admin/> in your browser and log in using the superuser credentials.
+
 ## Further Development
 
 This project serves as a foundation for building a comprehensive hospital management system. Potential enhancements include:
