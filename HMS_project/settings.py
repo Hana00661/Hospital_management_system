@@ -13,11 +13,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 from django.contrib.messages import constants as messages
-
+from dotenv import load_dotenv
 from environs import Env
 
 env = Env()            #initializing environment variables
 env.read_env()         #reading the environment variables
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -177,17 +178,22 @@ PAYPAL_SECRET_ID = env('PAYPAL_SECRET_ID')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Email Configs
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# ANYMAIL = {
+#     "MAILGUN_API_KEY": os.environ.get("MAILGUN_API_KEY"),
+#     "MAILGUN_SENDER_DOMAIN": os.environ.get("MAILGUN_SENDER_DOMAIN"),
+# }
 
-ANYMAIL = {
-    "MAILGUN_API_KEY": os.environ.get("MAILGUN_API_KEY"),
-    "MAILGUN_SENDER_DOMAIN": os.environ.get("MAILGUN_SENDER_DOMAIN"),
-}
+EMAIL_BACKEND="anymail.backends.mailgun.EmailBackend"
+EMAIL_HOST = "smtp.mailgun.org"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
+ACCOUNT_EMAIL_SUBJECT_PREFIX = ""
 
-FROM_EMAIL = env('FROM_EMAIL')
-EMAIL_BACKEND = env('EMAIL_BACKEND')
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
-SERVER_EMAIL = env('SERVER_EMAIL')
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_REQUIRED = True
 
 # Jazzmin Configs
 JAZZMIN_SETTINGS = {       #take a look for more info in the jazzmin website https://django-jazzmin.readthedocs.io/configuration/
