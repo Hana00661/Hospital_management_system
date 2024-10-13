@@ -92,6 +92,10 @@ pip install -r requirements.txt
 ### 4. Run migrations
 
 ```bash
+python manage.py makemigrations
+```
+
+```bash
 python manage.py migrate
 ```
 
@@ -118,6 +122,18 @@ This project serves as a foundation for building a comprehensive hospital manage
 - Messaging system for communication between patients and doctors.
 - Integration with medical record systems for patient data management.
 - Multi-hospital support with location management.
+
+## Deployment
+
+To deploy this project, you can use platforms like Heroku or AWS. Follow their documentation for deployment instructions.
+
+## Testing
+
+Run the tests to ensure the project's functionality:
+
+```bash
+python manage.py test
+```
 
 ## Contributing
 
