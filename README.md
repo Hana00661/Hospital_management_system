@@ -155,6 +155,6 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 For any inquiries or support, please contact:
 
-[eng.hana95@gmail.com](mailto:eng.hana95@gmail.com)
+- Hana Abdalhag [eng.hana95@gmail.com](mailto:eng.hana95@gmail.com)
 
 Thank you for using the Hospital Management System (VClinic)! We hope it helps streamline healthcare management effectively.
