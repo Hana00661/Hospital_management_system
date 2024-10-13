@@ -113,6 +113,32 @@ python manage.py runserver
 
 Visit <http://127.0.0.1:8000/> to view the website. Media Files The project handles car images. Ensure you have a media/ directory for image uploads. If you encounter issues, adjust the MEDIA_URL and MEDIA_ROOT in your settings.py. Features to Add Search and filter functionality for car listings. User reviews and ratings for sellers. Integration with a payment gateway for online transactions.
 
+make sure before you run the server you should create a 
+
+```bash
+.env
+```
+
+file and put the following variables in it
+
+```bash
+# where we will putting our secrets keys
+
+STRIPE_PUBLIC_KEY = 'your stripe-public-key'
+STRIPE_SECRET_KEY = 'your stripe-secret-key'
+
+PAYPAL_CLIENT_ID = 'your paypal-client-id'
+PAYPAL_SECRET_ID = 'your paypal-secret-id'
+
+MAILGUN_API_KEY = 'your-mailgun-api-key'
+MAILGUN_SENDER_DOOMAIN = 'your-mailgun-domain'
+
+FROM_EMAIL= 'youremail@gmail.com'
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL='youremail@gmail.com'
+SERVER_EMAIL='youremail@gmail.com'
+```
+
 ### Access the admin interface
 
 Visit <http://127.0.0.1:8000/admin/> in your browser and log in using the superuser credentials.
