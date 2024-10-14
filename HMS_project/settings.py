@@ -183,6 +183,7 @@ ANYMAIL = {
     "MAILGUN_SENDER_DOMAIN": os.environ.get("MAILGUN_SENDER_DOMAIN"),
 }
 
+FROM_EMAIL = os.getenv('FROM_EMAIL')
 EMAIL_BACKEND="anymail.backends.mailgun.EmailBackend"
 EMAIL_HOST = "smtp.mailgun.org"
 EMAIL_PORT = 587
@@ -192,8 +193,13 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ""
 
+SERVER_EMAIL = os.getenv('SERVER_EMAIL', FROM_EMAIL)
+
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
+
+print("FROM_EMAIL:", FROM_EMAIL)
+print("EMAIL_BACKEND:", EMAIL_BACKEND)
 
 # Jazzmin Configs
 JAZZMIN_SETTINGS = {       #take a look for more info in the jazzmin website https://django-jazzmin.readthedocs.io/configuration/
