@@ -154,6 +154,44 @@ def stripe_payment_verify(request, billing_id):
                 type="Appointment Scheduled"
             )
 
+            # Prepare data for the email templates
+            merge_data = {
+                "billing": billing
+            }
+
+            # Send appointment email to doctor
+            subject = "Hey Doctor, You have a New Appointment"
+            text_body = render_to_string("email/new_appointment.txt", merge_data)
+            html_body = render_to_string("email/new_appointment.html", merge_data)
+
+            try:
+                # Email to Doctor
+                msg = EmailMultiAlternatives(
+                    subject=subject,
+                    from_email=settings.FROM_EMAIL,
+                    to=[billing.appointment.doctor.user.email],
+                    body=text_body
+                )
+                msg.attach_alternative(html_body, "text/html")
+                msg.send()
+
+                # Email to Patient
+                subject = "Appointment Booked Successfully!!"
+                text_body = render_to_string("email/appointment_booked.txt", merge_data)
+                html_body = render_to_string("email/appointment_booked.html", merge_data)
+
+                msg = EmailMultiAlternatives(
+                    subject=subject,
+                    from_email=settings.FROM_EMAIL,
+                    to=[billing.appointment.patient.email],
+                    body=text_body
+                )
+                msg.attach_alternative(html_body, "text/html")
+                msg.send()
+
+            except Exception as e:
+                print(f"Email cannot be sent now! Error: {e}")
+                
             return redirect(f"/payment_status/{billing.billing_id}/?payment_status=paid")
     else:
         return redirect(f"/payment_status/{billing.billing_id}/?payment_status=failed")
