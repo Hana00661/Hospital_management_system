@@ -1,0 +1,30 @@
+{% extends 'partials/base.html' %} {% block content %}
+<section class="">
+    <div class="container">
+        <div class="row mt-0 mt-md-4">
+            {% include 'patientapp/sidebar.html' %}
+
+            <div class="col-lg-9 col-md-8 col-12">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row fs-4">
+                            <div class="col-md-4">
+                                <img src="{{ doctor.image.url }}" alt="doctor" class="img-fluid rounded" style="width: 200px;">
+                            </div>
+                            <div class="col-md-8">
+                                <h4 class="fw-bold">Dr. {{doctor.full_name}}</h4>
+                                <p class="text-muted">{{doctor.bio}}</p>
+                                <p class="text-muted"><strong>speciality:</strong> {{doctor.specializations}}</p>
+                                <p class="text-muted"><strong>Country:</strong> {{doctor.country}}</p>
+                                <p class="text-muted"><strong>Qualifications:</strong> {{doctor.qualifications}}</p> 
+                                <p class="text-muted"><strong>Years of experiance:</strong> {{doctor.years_of_experience}}</p>
+                                <p class="text-muted"><strong>Next Date:</strong> ${{doctor.next_available_appointment_date}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
