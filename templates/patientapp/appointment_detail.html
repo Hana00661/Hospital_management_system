@@ -15,12 +15,12 @@
                                 <p><span class="fw-semibold text-dark">Doctor:</span> {{appointment.doctor.full_name}}</p>
                                 <p><span class="fw-semibold text-dark">Issue:</span> {{appointment.issues}}</p>
                                 <p><span class="fw-semibold text-dark">Symptoms:</span> {{appointment.symptoms}}</p>
-                                <p><span class="fw-semibold text-dark">Status:</span> {{appointment.status}}</p>
+                                <p><span class="fw-semibold text-dark">Status:</span> {{appointment.appointment_status}}</p>
                                 <p><span class="fw-semibold text-dark">Date:</span> {{appointment.appointment_date}}</p>
                                 <p>
                                     <span class="fw-semibold text-dark">Action:</span>
 
-                                    {% if appointment.status == "Scheduled" %}
+                                    {% if appointment.appointment_status == "Scheduled" %}
                                     <a href="{% url 'patientapp:cancel_appointment' appointment.appointment_id %}" class="btn btn-outline-danger btn-sm">Cancel Appointment <i class="fas fa-trash ms-2"></i></a>
                                     <a href="{% url 'patientapp:complete_appointment' appointment.appointment_id %}" class="btn btn-outline-success btn-sm">Complete Appointment <i class="fas fa-check-circle ms-2"></i></a>
                                     {% endif %} {% if appointment.status == "Cancelled" %}
