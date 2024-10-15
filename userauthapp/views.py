@@ -72,9 +72,9 @@ def login_view(request):
                     next_url = request.GET.get("next", '/')
                     return redirect(next_url)
                 else:
-                    messages.error(request, "User Name Or Password Does Not Exist!")
+                    messages.error(request, "wrong User Name Or Password")
             except:
-                messages.error(request, "User does not exist!")
+                messages.error(request, "wrong User Name Or Password")
     else:
         form = userauths_forms.LoginForm()  #
     

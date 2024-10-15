@@ -5,6 +5,7 @@ from django.db import models
 
 from mainapp import models as base_models
 from patientapp import models as patient_models
+from doctorapp import models as doctor_models
 
 
 @login_required
@@ -158,3 +159,10 @@ def profile(request):
     }
 
     return render(request, "patientapp/profile.html", context)
+
+def doctor_info(request, doctor_id):
+    doctor = doctor_models.Doctor.objects.get(id=doctor_id)
+    context = {
+        "doctor": doctor
+    }
+    return render(request, "patientapp/doctor_info.html", context)

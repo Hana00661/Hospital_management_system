@@ -15,17 +15,17 @@
                                 <p><span class="fw-semibold text-dark">Patient:</span> {{appointment.patient.full_name}}</p>
                                 <p><span class="fw-semibold text-dark">Issue:</span> {{appointment.issues}}</p>
                                 <p><span class="fw-semibold text-dark">Symptoms:</span> {{appointment.symptoms}}</p>
-                                <p><span class="fw-semibold text-dark">Status:</span> {{appointment.status}}</p>
+                                <p><span class="fw-semibold text-dark">Status:</span> {{appointment.appointment_status}}</p>
                                 <p><span class="fw-semibold text-dark">Date:</span> {{appointment.appointment_date}}</p>
                                 <p>
                                     <span class="fw-semibold text-dark">Action:</span>
 
-                                    {% if appointment.status == "Scheduled" %}
+                                    {% if appointment.appointment_status == "Scheduled" %}
                                     <a href="{% url 'doctorapp:cancel_appointment' appointment.appointment_id %}" class="btn btn-outline-danger btn-sm">Cancel Appointment <i class="fas fa-trash ms-2"></i></a>
                                     <a href="{% url 'doctorapp:complete_appointment' appointment.appointment_id %}" class="btn btn-outline-success btn-sm">Complete Appointment <i class="fas fa-check-circle ms-2"></i></a>
-                                    {% endif %} {% if appointment.status == "Cancelled" %}
+                                    {% endif %} {% if appointment.appointment_status == "Cancelled" %}
                                     <a href="{% url 'doctorapp:activate_appointment' appointment.appointment_id %}" class="btn btn-success btn-sm">Activate Appointment <i class="fas fa-check-circle ms-2"></i></a>
-                                    {% endif %} {% if appointment.status == "Completed" %}
+                                    {% endif %} {% if appointment.appointment_status == "Completed" %}
                                     <a href="{% url 'doctorapp:activate_appointment' appointment.appointment_id %}" class="btn btn-success btn-sm">Completed <i class="fas fa-check-circle ms-2"></i></a>
                                     {% endif %}
                                 </p>
