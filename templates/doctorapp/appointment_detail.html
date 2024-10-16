@@ -22,6 +22,7 @@
 
                                     {% if appointment.appointment_status == "Scheduled" %}
                                     <a href="{% url 'doctorapp:cancel_appointment' appointment.appointment_id %}" class="btn btn-outline-danger btn-sm">Cancel Appointment <i class="fas fa-trash ms-2"></i></a>
+                                    {% endif %} {% if appointment.appointment_status == "Pending" %}
                                     <a href="{% url 'doctorapp:complete_appointment' appointment.appointment_id %}" class="btn btn-outline-success btn-sm">Complete Appointment <i class="fas fa-check-circle ms-2"></i></a>
                                     {% endif %} {% if appointment.appointment_status == "Cancelled" %}
                                     <a href="{% url 'doctorapp:activate_appointment' appointment.appointment_id %}" class="btn btn-success btn-sm">Activate Appointment <i class="fas fa-check-circle ms-2"></i></a>
