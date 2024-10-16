@@ -1,7 +1,13 @@
 # Hospital Management System
 
-This innovative Hospital Management System, developed using Django, is designed to streamline and enhance healthcare operations for hospitals and clinics. With functionalities such as patient and doctor registration, appointment scheduling, lab test result tracking, and prescription management, it provides a user-friendly platform that simplifies patient access to medical services and improves the efficiency of healthcare professionals' workflows.
-Tailored for healthcare institutions seeking a modern, efficient solution, this system empowers patients while giving doctors powerful tools for managing appointments and patient care.
+The Hospital Management System is designed for developing countries to simplify and enhance healthcare operations for hospitals and clinics.
+In developing countries, hospital treatment costs are usually high for patients because the doctor needs many assistants to be able to follow up on all the patients.  
+
+This application helps the doctor manage all patient follow-up processes, starting from confirming payments, through laboratory tests, and ending with treatment. This results in the hospital having to reduce the administrative staff, which leads to lower prices in hospitals, taking into account limited-income, distressed and suffering patients.  
+
+With functionalities such as patient and doctor registration, appointment scheduling, lab test result tracking, and prescription management, it provides a user-friendly platform that simplifies patient access to medical services and improves the efficiency of healthcare professionals' workflows.  
+
+Tailored for healthcare institutions seeking a modern, efficient solution, this system empowers patients while giving doctors powerful tools for managing appointments and patient care with lower costs.
 
 ## Target Audience
 
@@ -113,7 +119,7 @@ python manage.py runserver
 
 Visit <http://127.0.0.1:8000/> to view the website. Media Files The project handles car images. Ensure you have a media/ directory for image uploads. If you encounter issues, adjust the MEDIA_URL and MEDIA_ROOT in your settings.py. Features to Add Search and filter functionality for car listings. User reviews and ratings for sellers. Integration with a payment gateway for online transactions.
 
-make sure before you run the server you should create a 
+make sure before you run the server you should create a
 
 ```bash
 .env
