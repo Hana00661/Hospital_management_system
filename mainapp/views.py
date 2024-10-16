@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required       #if user is not 
 from django.views.decorators.csrf import csrf_exempt
 from django.urls import reverse
 from django.http import JsonResponse
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
 from django.conf import settings
@@ -71,7 +71,7 @@ def book_appointment(request, service_id, doctor_id):
             issues=issues,
             symptoms=symptoms,
         )
-        
+
         # Create a billing objects
         billing = base_models.Billing()
         billing.patient = patient
@@ -94,7 +94,7 @@ def book_appointment(request, service_id, doctor_id):
 @login_required
 def checkout(request, billing_id):
     billing = base_models.Billing.objects.get(billing_id=billing_id)
-    
+
     context = {
         "billing": billing,
         "stripe_public_key": settings.STRIPE_PUBLIC_KEY,
@@ -125,7 +125,7 @@ def stripe_payment(request, billing_id):
         mode='payment',
         success_url = request.build_absolute_uri(reverse("mainapp:stripe_payment_verify", args=[billing.billing_id])) + "?session_id={CHECKOUT_SESSION_ID}",
         cancel_url=request.build_absolute_uri(reverse("mainapp:stripe_payment_verify", args=[billing.billing_id])) + "?session_id={CHECKOUT_SESSION_ID}"
-        
+
     )
     return JsonResponse({"sessionId": checkout_session.id})     #sessionId is the id of the session that will help us open up a strips hosted pyament page
 
@@ -166,36 +166,34 @@ def stripe_payment_verify(request, billing_id):
 
             try:
                 # Email to Doctor
-                msg = EmailMultiAlternatives(
+                msg =  send_mail(
                     subject=subject,
-                    from_email=settings.FROM_EMAIL,
-                    to=[billing.appointment.doctor.user.email],
-                    body=text_body
+                    message=text_body,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[billing.appointment.doctor.user.email],
+                    html_message=html_body,
                 )
-                msg.attach_alternative(html_body, "text/html")
-                msg.send()
 
                 # Email to Patient
                 subject = "Appointment Booked Successfully!!"
                 text_body = render_to_string("email/appointment_booked.txt", merge_data)
                 html_body = render_to_string("email/appointment_booked.html", merge_data)
 
-                msg = EmailMultiAlternatives(
+                msg =  send_mail(
                     subject=subject,
-                    from_email=settings.FROM_EMAIL,
-                    to=[billing.appointment.patient.email],
-                    body=text_body
+                    message=text_body,
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=[billing.appointment.patient.email],
+                    html_message=html_body,
                 )
-                msg.attach_alternative(html_body, "text/html")
-                msg.send()
 
             except Exception as e:
                 print(f"Email cannot be sent now! Error: {e}")
-                
+
             return redirect(f"/payment_status/{billing.billing_id}/?payment_status=paid")
     else:
         return redirect(f"/payment_status/{billing.billing_id}/?payment_status=failed")
-    
+
 
 def get_paypal_access_token():
     token_url = 'https://api.sandbox.paypal.com/v1/oauth2/token'
@@ -257,40 +255,39 @@ def paypal_payment_verify(request, billing_id):
                 text_body = render_to_string("email/new_appointment.txt", merge_data)
                 html_body = render_to_string("email/new_appointment.html", merge_data)
 
-                # Add the try-catch to gracefully handle the case where email cannot be sent
                 try:
-                    msg = EmailMultiAlternatives(
+                    # Email to Doctor
+                    msg =  send_mail(
                         subject=subject,
-                        from_email=settings.FROM_EMAIL,
-                        to=[billing.appointment.doctor.user.email],
-                        body=text_body
+                        message=text_body,
+                        from_email=settings.DEFAULT_FROM_EMAIL,
+                        recipient_list=[billing.appointment.doctor.user.email],
+                        html_message=html_body,
                     )
-                    msg.attach_alternative(html_body, "text/html")
-                    msg.send()
 
-                    # Send appointment booked email to patient
+                    # Email to Patient
                     subject = "Appointment Booked Successfully!!"
                     text_body = render_to_string("email/appointment_booked.txt", merge_data)
                     html_body = render_to_string("email/appointment_booked.html", merge_data)
 
-                    msg = EmailMultiAlternatives(
+                    msg =  send_mail(
                         subject=subject,
-                        from_email=settings.FROM_EMAIL,
-                        to=[billing.appointment.patient.email],
-                        body=text_body
+                        message=text_body,
+                        from_email=settings.DEFAULT_FROM_EMAIL,
+                        recipient_list=[billing.appointment.patient.email],
+                        html_message=html_body,
                     )
-                    msg.attach_alternative(html_body, "text/html")
-                    msg.send()
-                except:
-                    print("Email cannot be sent now!")
+
+                except Exception as e:
+                    print(f"Email cannot be sent now! Error: {e}")
 
                 return redirect(f"/payment_status/{billing.billing_id}/?payment_status=paid")
-        
+
         return redirect(f"/payment_status/{billing.billing_id}/?payment_status=failed")
-        
-    
+
+
     return redirect(f"/payment_status/{billing.billing_id}/?payment_status=failed")
-    
+
 
 @login_required
 def payment_status(request, billing_id):
