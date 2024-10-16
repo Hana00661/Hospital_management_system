@@ -55,7 +55,7 @@ def cancel_appointment(request, appointment_id):
     doctor = doctor_models.Doctor.objects.get(user=request.user)
     appointment = base_models.Appointment.objects.get(appointment_id=appointment_id, doctor=doctor)
 
-    appointment.status = "Cancelled"
+    appointment.appointment_status = "Cancelled"
     appointment.save()
 
     messages.success(request, "Appointment Cancelled Successfully")
@@ -67,7 +67,7 @@ def activate_appointment(request, appointment_id):
     doctor = doctor_models.Doctor.objects.get(user=request.user)
     appointment = base_models.Appointment.objects.get(appointment_id=appointment_id, doctor=doctor)
 
-    appointment.status = "Scheduled"
+    appointment.appointment_status = "Scheduled"
     appointment.save()
 
     messages.success(request, "Appointment Re-Scheduled Successfully")
@@ -79,7 +79,7 @@ def complete_appointment(request, appointment_id):
     doctor = doctor_models.Doctor.objects.get(user=request.user)
     appointment = base_models.Appointment.objects.get(appointment_id=appointment_id, doctor=doctor)
 
-    appointment.status = "Completed"
+    appointment.appointment_status = "Completed"
     appointment.save()
 
     messages.success(request, "Appointment Completed Successfully")
