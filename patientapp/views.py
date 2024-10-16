@@ -70,7 +70,7 @@ def activate_appointment(request, appointment_id):
     patient = patient_models.Patient.objects.get(user=request.user)
     appointment = base_models.Appointment.objects.get(appointment_id=appointment_id, patient=patient)
 
-    appointment.status = "Scheduled"
+    appointment.appointment_status = "Scheduled"
     appointment.save()
 
     messages.success(request, "Appointment Re-Scheduled Successfully")
@@ -82,7 +82,7 @@ def complete_appointment(request, appointment_id):
     patient = patient_models.Patient.objects.get(user=request.user)
     appointment = base_models.Appointment.objects.get(appointment_id=appointment_id, patient=patient)
 
-    appointment.status = "Completed"
+    appointment.appointment_status = "Completed"
     appointment.save()
 
     messages.success(request, "Appointment Completed Successfully")
@@ -160,6 +160,7 @@ def profile(request):
 
     return render(request, "patientapp/profile.html", context)
 
+@login_required
 def doctor_info(request, doctor_id):
     doctor = doctor_models.Doctor.objects.get(id=doctor_id)
     context = {
