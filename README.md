@@ -210,7 +210,7 @@ server {
 }
 ```
 # Gunicorn Systemd Service Configuration
-    To set up Gunicorn as a service for the Django application, use the following systemd service configuration:
+To set up Gunicorn as a service for the Django application, use the following systemd service configuration:
 ```bash
 sudo vim /etc/systemd/system/gunicorn.service 
 ```
@@ -232,7 +232,7 @@ sudo vim /etc/systemd/system/gunicorn.service
     WantedBy=multi-user.target
 ```
 # Gunicorn Socket Configuration
-    To set up a socket for Gunicorn, use the following systemd socket configuration:
+To set up a socket for Gunicorn, use the following systemd socket configuration:
 ```bash
 sudo vim /etc/systemd/system/gunicorn.soket 
 ```
