@@ -160,6 +160,9 @@ This project serves as a foundation for building a comprehensive hospital manage
 - Integration with medical record systems for patient data management.
 - Multi-hospital support with location management.
 
+- Set the new user verification message. 
+
+- Transferring the doctor to a separate page showing the number of patients he has, their medical data, and their health conditions.
 ## Deployment
 
 To deploy this project, you can use platforms like Heroku or AWS. Follow their documentation for deployment instructions.
