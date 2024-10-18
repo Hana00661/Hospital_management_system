@@ -253,7 +253,11 @@ Run the tests to ensure the project's functionality:
 ```bash
 python manage.py test
 ```
-
+Running specific tests:
+To run tests within a specific app or module, provide the app name or module path as an argument:
+```bash
+python manage.py test myapp.tests
+```
 ## Contributing
 
 Contributions are welcome! Please follow these steps:
