@@ -128,7 +128,7 @@ make sure before you run the server you should create a
 
 file and put the following variables in it
 
-```bash
+```ini
 # where we will putting our secrets keys
 
 STRIPE_PUBLIC_KEY = 'your stripe-public-key'
