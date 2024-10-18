@@ -170,7 +170,9 @@ To deploy this project, you can use platforms like Heroku or AWS. Follow their d
 # Nginx Configuration for Django Application
 
 To serve the Django application using Nginx and Gunicorn, use the following configuration:
-
+```bash
+sudo vim /etc/nginx/sites-available/yourfile.con
+```
 ```nginx
 server {
     listen 80;
@@ -209,6 +211,9 @@ server {
 ```
 # Gunicorn Systemd Service Configuration
     To set up Gunicorn as a service for the Django application, use the following systemd service configuration:
+```bash
+sudo vim /etc/systemd/system/gunicorn.service 
+```
 ```ini
     [Unit]
     Description=gunicorn daemon
@@ -228,7 +233,9 @@ server {
 ```
 # Gunicorn Socket Configuration
     To set up a socket for Gunicorn, use the following systemd socket configuration:
-
+```bash
+sudo vim /etc/systemd/system/gunicorn.soket 
+```
 ```ini
 [Unit]
 Description=gunicorn socket
