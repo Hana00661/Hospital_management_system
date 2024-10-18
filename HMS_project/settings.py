@@ -33,6 +33,7 @@ SECRET_KEY = 'django-insecure-oowm4u9r5$=49nzzgb#*9miy*=4lvp4t7&3fx7+f^pt^ogs)ka
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://vclinic.kashtapp.com']
 SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'      # allow popups from the same origin
 
 # Application definition
