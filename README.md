@@ -261,6 +261,36 @@ sudo systemctl restart gunicorn
 ```bash
 sudo systemctl restart nginx
 ```
+
+# Backup Script for Django Application
+
+This script creates a compressed backup of your Django application files, storing it in a specified backup directory. It also maintains only the three most recent backups by deleting older backups.
+
+## Script Overview
+
+The script does the following:
+1. Defines the backup and Django project directories.
+2. Creates a timestamped backup filename.
+3. Creates the backup directory if it doesn't already exist.
+4. Compresses the Django project files into a `.tar.gz` file.
+5. Deletes older backups, keeping only the three most recent backups.
+
+## Backup Script
+
+```bash
+#!/bin/bash
+
+BACKUP_DIR="/path/to/backup/directory"  # Specify the backup directory
+DJANGO_PROJECT_DIR="/path/to/django/project"  # Specify your Django project directory
+TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+BACKUP_NAME="django_app_backup_$TIMESTAMP.tar.gz"
+
+mkdir -p "$BACKUP_DIR"  # Create the backup directory if it doesn't exist
+tar -czf "$BACKUP_DIR/$BACKUP_NAME" -C "$DJANGO_PROJECT_DIR" .  # Create the backup
+
+cd "$BACKUP_DIR" || exit  # Navigate to the backup directory
+ls -tp | grep -v '/$' | tail -n +4 | xargs -I {} rm -- {}  # Keep only the last 3 backups
+```
 ## Testing
 
 Run the tests to ensure the project's functionality:
