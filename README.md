@@ -68,6 +68,13 @@ pip install django
 
 ## Installation
 
+## installation Notes
+
+    Python Version: Ensure you are using Python 3.10 or higher.
+    Django Version: This project is compatible with Django 4.2.2.
+
+
+
 ### 1. Clone the repository
 
 ```bash
@@ -79,26 +86,20 @@ cd hospital-management-system
 ### 2. Set up a virtual environment (recommended)
 
 ```bash
-python -m venv venv
-source venv/bin/activate  # For Windows: venv\Scripts\activate
-```
-
-you can use conda for acitivate the virtual environment
-
-```bash
-conda activate venv
+python -m venv env
+source env/bin/activate  # For Windows: venv\Scripts\activate
 ```
 
 ### 3. Install dependencies
 
 ```bash
-pip install -r requirements.txt
+    pip install -r requirements.txt
 ```
 
 ### 4. Run migrations
 
 ```bash
-python manage.py makemigrations
+    python manage.py makemigrations
 ```
 
 ```bash
