@@ -167,62 +167,55 @@ To deploy this project, you can use platforms like Heroku or AWS. Follow their d
 # Nginx Configuration for Django Application
     To serve the Django application using Nginx and Gunicorn, use the following configuration:
 
-
-            server {
-            listen 80;
-            server_name server_ip_or_domain;  # Replace with your server's IP address or domain name
-
-            # Security headers
-            add_header X-Content-Type-Options nosniff;
-            add_header X-Frame-Options DENY;
-            add_header X-XSS-Protection "1; mode=block";
-
-            # Favicon settings
-            location = /favicon.ico { 
-                access_log off; 
-                log_not_found off; 
-            }
-
-            # Static files configuration
-            location /static/ {
-                root /path/to/project;  # Replace with the path to your Django project's static files
-            }
-
-            location /staticfiles/ {
-                root /path/to/project;  # Same path as above
-            }
-
-            location /uploads/ {
-                root /path/to/project;  # Same path as above
-            }
-
-            # Proxy configuration for Gunicorn
-            location / {
-                include proxy_params;
-                proxy_pass http://unix:/run/gunicorn.sock;  # Adjust the path if your Gunicorn socket is located elsewhere
-            }
+```bash
+        server {
+        listen 80;
+        server_name server_ip_or_domain;  # Replace with your server's IP address or domain name
+        # Security headers
+        add_header X-Content-Type-Options nosniff;
+        add_header X-Frame-Options DENY;
+        add_header X-XSS-Protection "1; mode=block";
+        # Favicon settings
+        location = /favicon.ico { 
+            access_log off; 
+            log_not_found off; 
         }
+        # Static files configuration
+        location /static/ {
+            root /path/to/project;  # Replace with the path to your Django project's static files
+        }
+        location /staticfiles/ {
+            root /path/to/project;  # Same path as above
+        }
+        location /uploads/ {
+            root /path/to/project;  # Same path as above
+        }
+        # Proxy configuration for Gunicorn
+        location / {
+            include proxy_params;
+            proxy_pass http://unix:/run/gunicorn.sock;  # Adjust the path if your Gunicorn socket is located elsewhere
+        }
+    }
+```
 # Gunicorn Systemd Service Configuration
     To set up Gunicorn as a service for the Django application, use the following systemd service configuration:
-        
-        [Unit]
-        Description=gunicorn daemon
-        Requires=gunicorn.socket
-        After=network.target
-
-        [Service]
-        User=alx
-        Group=www-data
-        WorkingDirectory=/home/alx/Hospital_management_system
-        ExecStart=/home/alx/Hospital_management_system/env/bin/gunicorn \
-                  --access-logfile - \
-                  --workers 3 \
-                  --bind unix:/run/gunicorn.sock \
-                  HMS_project.wsgi:application
-
-        [Install]
-        WantedBy=multi-user.target
-
+```bash 
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.targe
+[Service]
+User=alx
+Group=www-data
+WorkingDirectory=/home/alx/Hospital_management_system
+ExecStart=/home/alx/Hospital_management_system/env/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/gunicorn.sock \
+          HMS_project.wsgi:applicatio
+[Install]
+WantedBy=multi-user.target
+```
 
 ## Testing
 
