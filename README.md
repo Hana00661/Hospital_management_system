@@ -249,15 +249,16 @@ WantedBy=sockets.target
 
 # Managing Services
 After making changes to the Gunicorn or Nginx configurations, you need to reload the systemd daemon and restart the services to apply the changes. Use the following commands:
-
-```bash
 # Reload the systemd manager configuration
+```bash
 sudo systemctl daemon-reload
-
+```
 # Restart the Gunicorn service
+```bash
 sudo systemctl restart gunicorn
-
+```
 # Restart the Nginx service
+```bash
 sudo systemctl restart nginx
 ```
 ## Testing
