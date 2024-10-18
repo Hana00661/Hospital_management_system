@@ -155,14 +155,12 @@ Visit <http://127.0.0.1:8000/admin/> in your browser and log in using the superu
 This project serves as a foundation for building a comprehensive hospital management system. Potential enhancements include:
 
 - Integration with payment gateways for appointment booking fees.
-- Appointment cancellation and rescheduling functionalities.
 - Messaging system for communication between patients and doctors.
 - Integration with medical record systems for patient data management.
 - Multi-hospital support with location management.
-
-- Set the new user verification message. 
-
+- Set the new user verification message.
 - Transferring the doctor to a separate page showing the number of patients he has, their medical data, and their health conditions.
+
 ## Deployment
 
 To deploy this project, you can use platforms like Heroku or AWS. Follow their documentation for deployment instructions.
@@ -184,16 +182,16 @@ server {
     add_header X-XSS-Protection "1; mode=block";
 
     # Favicon settings
-    location = /favicon.ico { 
-        access_log off; 
-        log_not_found off; 
+    location = /favicon.ico {
+        access_log off;
+        log_not_found off;
     }
 
     # Static files configuration
     location /static/ {
         root /path/to/your/project;  # Replace with the path to your Django project's static files
     }
-    
+
     location /staticfiles/ {
         root /path/to/your/project;  # Same path as above
     }
@@ -201,7 +199,7 @@ server {
     location /uploads/ {
         root /path/to/your/project;  # Same path as above
     }
-    
+
     # Proxy configuration for Gunicorn
     location / {
         include proxy_params;
@@ -212,7 +210,7 @@ server {
 # Gunicorn Systemd Service Configuration
 To set up Gunicorn as a service for the Django application, use the following systemd service configuration:
 ```bash
-sudo vim /etc/systemd/system/gunicorn.service 
+sudo vim /etc/systemd/system/gunicorn.service
 ```
 ```ini
     [Unit]
@@ -234,7 +232,7 @@ sudo vim /etc/systemd/system/gunicorn.service
 # Gunicorn Socket Configuration
 To set up a socket for Gunicorn, use the following systemd socket configuration:
 ```bash
-sudo vim /etc/systemd/system/gunicorn.soket 
+sudo vim /etc/systemd/system/gunicorn.soket
 ```
 ```ini
 [Unit]
