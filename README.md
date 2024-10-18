@@ -245,7 +245,7 @@ ListenStream=/run/gunicorn.sock
 
 [Install]
 WantedBy=sockets.target
-
+```
 ## Testing
 
 Run the tests to ensure the project's functionality:
