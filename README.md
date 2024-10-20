@@ -68,6 +68,13 @@ pip install django
 
 ## Installation
 
+## installation Notes
+
+    Python Version: Ensure you are using Python 3.10 or higher.
+    Django Version: This project is compatible with Django 4.2.2.
+
+
+
 ### 1. Clone the repository
 
 ```bash
@@ -79,26 +86,20 @@ cd hospital-management-system
 ### 2. Set up a virtual environment (recommended)
 
 ```bash
-python -m venv venv
-source venv/bin/activate  # For Windows: venv\Scripts\activate
-```
-
-you can use conda for acitivate the virtual environment
-
-```bash
-conda activate venv
+python -m venv env
+source env/bin/activate  # For Windows: venv\Scripts\activate
 ```
 
 ### 3. Install dependencies
 
 ```bash
-pip install -r requirements.txt
+    pip install -r requirements.txt
 ```
 
 ### 4. Run migrations
 
 ```bash
-python manage.py makemigrations
+    python manage.py makemigrations
 ```
 
 ```bash
@@ -127,7 +128,7 @@ make sure before you run the server you should create a
 
 file and put the following variables in it
 
-```bash
+```ini
 # where we will putting our secrets keys
 
 STRIPE_PUBLIC_KEY = 'your stripe-public-key'
@@ -154,15 +155,140 @@ Visit <http://127.0.0.1:8000/admin/> in your browser and log in using the superu
 This project serves as a foundation for building a comprehensive hospital management system. Potential enhancements include:
 
 - Integration with payment gateways for appointment booking fees.
-- Appointment cancellation and rescheduling functionalities.
 - Messaging system for communication between patients and doctors.
 - Integration with medical record systems for patient data management.
 - Multi-hospital support with location management.
+- Set the new user verification message.
+- Transferring the doctor to a separate page showing the number of patients he has, their medical data, and their health conditions.
 
 ## Deployment
 
 To deploy this project, you can use platforms like Heroku or AWS. Follow their documentation for deployment instructions.
 
+# Nginx Configuration for Django Application
+
+To serve the Django application using Nginx and Gunicorn, use the following configuration:
+```bash
+sudo vim /etc/nginx/sites-available/yourfile.con
+```
+```nginx
+server {
+    listen 80;
+    server_name your_server_ip_or_domain;  # Replace with your server's IP address or domain name
+
+    # Security headers
+    add_header X-Content-Type-Options nosniff;
+    add_header X-Frame-Options DENY;
+    add_header X-XSS-Protection "1; mode=block";
+
+    # Favicon settings
+    location = /favicon.ico {
+        access_log off;
+        log_not_found off;
+    }
+
+    # Static files configuration
+    location /static/ {
+        root /path/to/your/project;  # Replace with the path to your Django project's static files
+    }
+
+    location /staticfiles/ {
+        root /path/to/your/project;  # Same path as above
+    }
+
+    location /uploads/ {
+        root /path/to/your/project;  # Same path as above
+    }
+
+    # Proxy configuration for Gunicorn
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn.sock;  # Adjust the path if your Gunicorn socket is located elsewhere
+    }
+}
+```
+# Gunicorn Systemd Service Configuration
+To set up Gunicorn as a service for the Django application, use the following systemd service configuration:
+```bash
+sudo vim /etc/systemd/system/gunicorn.service
+```
+```ini
+    [Unit]
+    Description=gunicorn daemon
+    Requires=gunicorn.socket
+    After=network.targe
+    [Service]
+    User=alx
+    Group=www-data
+    WorkingDirectory=/home/alx/Hospital_management_system
+    ExecStart=/home/alx/Hospital_management_system/env/bin/gunicorn \
+              --access-logfile - \
+              --workers 3 \
+              --bind unix:/run/gunicorn.sock \
+              HMS_project.wsgi:applicatio
+    [Install]
+    WantedBy=multi-user.target
+```
+# Gunicorn Socket Configuration
+To set up a socket for Gunicorn, use the following systemd socket configuration:
+```bash
+sudo vim /etc/systemd/system/gunicorn.soket
+```
+```ini
+[Unit]
+Description=gunicorn socket
+
+[Socket]
+ListenStream=/run/gunicorn.sock
+
+[Install]
+WantedBy=sockets.target
+```
+
+# Managing Services
+After making changes to the Gunicorn or Nginx configurations, you need to reload the systemd daemon and restart the services to apply the changes. Use the following commands:
+# Reload the systemd manager configuration
+```bash
+sudo systemctl daemon-reload
+```
+# Restart the Gunicorn service
+```bash
+sudo systemctl restart gunicorn
+```
+# Restart the Nginx service
+```bash
+sudo systemctl restart nginx
+```
+
+# Backup Script for Django Application
+
+This script creates a compressed backup of your Django application files, storing it in a specified backup directory. It also maintains only the three most recent backups by deleting older backups.
+
+## Script Overview
+
+The script does the following:
+1. Defines the backup and Django project directories.
+2. Creates a timestamped backup filename.
+3. Creates the backup directory if it doesn't already exist.
+4. Compresses the Django project files into a `.tar.gz` file.
+5. Deletes older backups, keeping only the three most recent backups.
+
+## Backup Script
+
+```bash
+#!/bin/bash
+
+BACKUP_DIR="/path/to/backup/directory"  # Specify the backup directory
+DJANGO_PROJECT_DIR="/path/to/django/project"  # Specify your Django project directory
+TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+BACKUP_NAME="django_app_backup_$TIMESTAMP.tar.gz"
+
+mkdir -p "$BACKUP_DIR"  # Create the backup directory if it doesn't exist
+tar -czf "$BACKUP_DIR/$BACKUP_NAME" -C "$DJANGO_PROJECT_DIR" .  # Create the backup
+
+cd "$BACKUP_DIR" || exit  # Navigate to the backup directory
+ls -tp | grep -v '/$' | tail -n +4 | xargs -I {} rm -- {}  # Keep only the last 3 backups
+```
 ## Testing
 
 Run the tests to ensure the project's functionality:
@@ -170,7 +296,11 @@ Run the tests to ensure the project's functionality:
 ```bash
 python manage.py test
 ```
-
+Running specific tests:
+To run tests within a specific app or module, provide the app name or module path as an argument:
+```bash
+python manage.py test myapp.tests
+```
 ## Contributing
 
 Contributions are welcome! Please follow these steps:
