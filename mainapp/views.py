@@ -63,7 +63,7 @@ def book_appointment(request, service_id, doctor_id):
         patient.save()
 
         # Create appointment object
-        appointment =base_models.Appointment.objects.create(
+        appointment = base_models.Appointment.objects.create(
             service=service,
             doctor=doctor,
             patient=patient,
@@ -90,6 +90,11 @@ def book_appointment(request, service_id, doctor_id):
         "patient": patient,
     }
     return render(request, "mainapp/book_appointment.html", context)
+
+
+def doctor_redirect(request):
+    return render(request, "mainapp/doctor_redirect.html")
+
 
 @login_required
 def checkout(request, billing_id):
