@@ -1,0 +1,15 @@
+{% extends 'partials/base.html' %} {% block content %}
+<section class="container">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-12 col lg-7 p-4 rounded-3 bg-white">
+            <h1 class="display-6 fw-bold mt-5">
+                you are logged in as a<span class="text-danger"><b class="display-2"> Doctor </b></span> please login as patient to booking.
+            </h1>
+            <div class="d-flex align-items-center gap-2 mt-5 justify-content-center">
+                <a class="btn btn-danger btn-lg mx-4" href="{% url 'userauthapp:sign-out' %}">log out <i class="fas fa-sign-out-alt ms-3"></i></a>
+                <a class="btn btn-outline-primary btn-lg mx-4" href="{% url 'doctorapp:dashboard'%}">Dashboard <i class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
