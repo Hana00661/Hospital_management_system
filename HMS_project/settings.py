@@ -58,12 +58,12 @@ INSTALLED_APPS = [
 
     'anymail',
     
-    # 'django.contrib.sites',  # Required by allauth
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',  # Enable for social logins
+    'django.contrib.sites',  # Required by allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',  # Enable for social logins
     
-    # 'allauth.socialaccount.providers.google',  # Example provider
+    'allauth.socialaccount.providers.google',  # Example provider
 
 ]
 
@@ -76,7 +76,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     
-    # 'allauth.account.middleware.AccountMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'HMS_project.urls'
@@ -176,8 +176,6 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 # Stripe API Keys
-# STRIPE_PUBLIC_KEY = env("STRIPE_PUBLIC_KEY")
-# STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
 STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 
@@ -191,12 +189,6 @@ PAYPAL_SECRET_ID = os.environ.get('PAYPAL_SECRET_ID')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Email Configs
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-# ANYMAIL = {
-#     "MAILGUN_API_KEY": os.environ.get("MAILGUN_API_KEY"),
-#     "MAILGUN_SENDER_DOMAIN": os.environ.get("MAILGUN_SENDER_DOMAIN"),
-# }
 
 EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
@@ -207,20 +199,17 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
 ACCOUNT_EMAIL_SUBJECT_PREFIX = ""
 
-# SERVER_EMAIL = os.getenv('SERVER_EMAIL', FROM_EMAIL)
-
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_REQUIRED = True
 
-# print("FROM_EMAIL:", FROM_EMAIL)
 print("EMAIL_BACKEND:", EMAIL_BACKEND)
 
-# AUTHENTICATION_BACKENDS = (
-#     'django.contrib.auth.backends.ModelBackend',
-#     'allauth.account.auth_backends.AuthenticationBackend',
-# )
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
 
-# SITE_ID = 1
+SITE_ID = 1
 
 # Jazzmin Configs
 JAZZMIN_SETTINGS = {       #take a look for more info in the jazzmin website https://django-jazzmin.readthedocs.io/configuration/
