@@ -25,7 +25,7 @@ urlpatterns = [
     path("auth/", include("userauthapp.urls")),
     path("doctor/", include("doctorapp.urls", namespace="doctorapp")),
     path("patient/", include("patientapp.urls")),
-
+    path('accounts/', include('allauth.urls')),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -52,8 +52,18 @@ INSTALLED_APPS = [
     'doctorapp',
     'patientapp',
     'userauthapp',
+    
+    "crispy_forms",
+    "crispy_bootstrap5",
 
     'anymail',
+    
+    'django.contrib.sites',  # Required by allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',  # Enable for social logins
+    
+    'allauth.socialaccount.providers.google',  # Example provider
 
 ]
 
@@ -65,6 +75,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'HMS_project.urls'
@@ -164,12 +176,14 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 # Stripe API Keys
-STRIPE_PUBLIC_KEY = env("STRIPE_PUBLIC_KEY")
-STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
+# STRIPE_PUBLIC_KEY = env("STRIPE_PUBLIC_KEY")
+# STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 
 # Paypal API Keys
-PAYPAL_CLIENT_ID = env('PAYPAL_CLIENT_ID')
-PAYPAL_SECRET_ID = env('PAYPAL_SECRET_ID')
+PAYPAL_CLIENT_ID = os.environ.get('PAYPAL_CLIENT_ID')
+PAYPAL_SECRET_ID = os.environ.get('PAYPAL_SECRET_ID')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -200,6 +214,13 @@ ACCOUNT_EMAIL_REQUIRED = True
 
 # print("FROM_EMAIL:", FROM_EMAIL)
 print("EMAIL_BACKEND:", EMAIL_BACKEND)
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+SITE_ID = 1
 
 # Jazzmin Configs
 JAZZMIN_SETTINGS = {       #take a look for more info in the jazzmin website https://django-jazzmin.readthedocs.io/configuration/
