@@ -58,12 +58,12 @@ INSTALLED_APPS = [
 
     'anymail',
     
-    'django.contrib.sites',  # Required by allauth
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',  # Enable for social logins
+    # 'django.contrib.sites',  # Required by allauth
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',  # Enable for social logins
     
-    'allauth.socialaccount.providers.google',  # Example provider
+    # 'allauth.socialaccount.providers.google',  # Example provider
 
 ]
 
@@ -76,7 +76,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     
-    'allauth.account.middleware.AccountMiddleware',
+    # 'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'HMS_project.urls'
@@ -215,12 +215,12 @@ ACCOUNT_EMAIL_REQUIRED = True
 # print("FROM_EMAIL:", FROM_EMAIL)
 print("EMAIL_BACKEND:", EMAIL_BACKEND)
 
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-)
+# AUTHENTICATION_BACKENDS = (
+#     'django.contrib.auth.backends.ModelBackend',
+#     'allauth.account.auth_backends.AuthenticationBackend',
+# )
 
-SITE_ID = 1
+# SITE_ID = 1
 
 # Jazzmin Configs
 JAZZMIN_SETTINGS = {       #take a look for more info in the jazzmin website https://django-jazzmin.readthedocs.io/configuration/
