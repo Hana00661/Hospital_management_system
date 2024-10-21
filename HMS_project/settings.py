@@ -61,9 +61,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',  # Required by allauth
     'allauth',
     'allauth.account',
-    'allauth.socialaccount',  # Enable for social logins
-    
-    'allauth.socialaccount.providers.google',  # Example provider
 
 ]
 
