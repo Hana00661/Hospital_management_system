@@ -70,10 +70,8 @@ pip install django
 
 ## installation Notes
 
-    Python Version: Ensure you are using Python 3.10 or higher.
-    Django Version: This project is compatible with Django 4.2.2.
-
-
+Python Version: Ensure you are using Python 3.10 or higher.
+Django Version: This project is compatible with Django 4.2.2.
 
 ### 1. Clone the repository
 
@@ -93,13 +91,13 @@ source env/bin/activate  # For Windows: venv\Scripts\activate
 ### 3. Install dependencies
 
 ```bash
-    pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ### 4. Run migrations
 
 ```bash
-    python manage.py makemigrations
+python manage.py makemigrations
 ```
 
 ```bash
@@ -118,7 +116,7 @@ python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Visit <http://127.0.0.1:8000/> to view the website. Media Files The project handles car images. Ensure you have a media/ directory for image uploads. If you encounter issues, adjust the MEDIA_URL and MEDIA_ROOT in your settings.py. Features to Add Search and filter functionality for car listings. User reviews and ratings for sellers. Integration with a payment gateway for online transactions.
+Visit <http://127.0.0.1:8000/> to view the website.
 
 make sure before you run the server you should create a
 
@@ -154,10 +152,9 @@ Visit <http://127.0.0.1:8000/admin/> in your browser and log in using the superu
 
 This project serves as a foundation for building a comprehensive hospital management system. Potential enhancements include:
 
-- Integration with payment gateways for appointment booking fees.
 - Messaging system for communication between patients and doctors.
-- Integration with medical record systems for patient data management.
 - Multi-hospital support with location management.
+- Adding a new access for the lab technician to receives the test directly from the doctor
 - Set the new user verification message.
 - Transferring the doctor to a separate page showing the number of patients he has, their medical data, and their health conditions.
 
@@ -165,13 +162,16 @@ This project serves as a foundation for building a comprehensive hospital manage
 
 To deploy this project, you can use platforms like Heroku or AWS. Follow their documentation for deployment instructions.
 
-# Nginx Configuration for Django Application
+## Nginx Configuration for Django Application
 
 To serve the Django application using Nginx and Gunicorn, use the following configuration:
+
 ```bash
 sudo vim /etc/nginx/sites-available/yourfile.con
 ```
+
 ```nginx
+
 server {
     listen 80;
     server_name your_server_ip_or_domain;  # Replace with your server's IP address or domain name
@@ -207,11 +207,15 @@ server {
     }
 }
 ```
-# Gunicorn Systemd Service Configuration
+
+## Gunicorn Systemd Service Configuration
+
 To set up Gunicorn as a service for the Django application, use the following systemd service configuration:
+
 ```bash
 sudo vim /etc/systemd/system/gunicorn.service
 ```
+
 ```ini
     [Unit]
     Description=gunicorn daemon
@@ -229,11 +233,15 @@ sudo vim /etc/systemd/system/gunicorn.service
     [Install]
     WantedBy=multi-user.target
 ```
-# Gunicorn Socket Configuration
+
+## Gunicorn Socket Configuration
+
 To set up a socket for Gunicorn, use the following systemd socket configuration:
+
 ```bash
 sudo vim /etc/systemd/system/gunicorn.soket
 ```
+
 ```ini
 [Unit]
 Description=gunicorn socket
@@ -245,28 +253,36 @@ ListenStream=/run/gunicorn.sock
 WantedBy=sockets.target
 ```
 
-# Managing Services
+## Managing Services
+
 After making changes to the Gunicorn or Nginx configurations, you need to reload the systemd daemon and restart the services to apply the changes. Use the following commands:
-# Reload the systemd manager configuration
+
+## Reload the systemd manager configuration
+
 ```bash
 sudo systemctl daemon-reload
 ```
-# Restart the Gunicorn service
+
+## Restart the Gunicorn service
+
 ```bash
 sudo systemctl restart gunicorn
 ```
-# Restart the Nginx service
+
+## Restart the Nginx service
+
 ```bash
 sudo systemctl restart nginx
 ```
 
-# Backup Script for Django Application
+## Backup Script for Django Application
 
 This script creates a compressed backup of your Django application files, storing it in a specified backup directory. It also maintains only the three most recent backups by deleting older backups.
 
 ## Script Overview
 
 The script does the following:
+
 1. Defines the backup and Django project directories.
 2. Creates a timestamped backup filename.
 3. Creates the backup directory if it doesn't already exist.
@@ -289,6 +305,7 @@ tar -czf "$BACKUP_DIR/$BACKUP_NAME" -C "$DJANGO_PROJECT_DIR" .  # Create the bac
 cd "$BACKUP_DIR" || exit  # Navigate to the backup directory
 ls -tp | grep -v '/$' | tail -n +4 | xargs -I {} rm -- {}  # Keep only the last 3 backups
 ```
+
 ## Testing
 
 Run the tests to ensure the project's functionality:
@@ -296,11 +313,14 @@ Run the tests to ensure the project's functionality:
 ```bash
 python manage.py test
 ```
+
 Running specific tests:
 To run tests within a specific app or module, provide the app name or module path as an argument:
+
 ```bash
 python manage.py test myapp.tests
 ```
+
 ## Contributing
 
 Contributions are welcome! Please follow these steps:
