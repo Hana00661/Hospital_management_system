@@ -33,6 +33,8 @@ def register_view(request):
                     patient_models.Patient.objects.create(user=user, full_name=full_name, email=email)
 
                 messages.success(request, "Account created successfully")
+                if user_type == "Doctor":
+                    return redirect("/doctor/profile")        #redirect user to home page
                 return redirect("/")        #redirect user to home page
 
             else:
@@ -68,8 +70,10 @@ def login_view(request):
                     login(request, user_authenticate)
 
                     messages.success(request, "Now Your Logged In successfully")
-                    
-                    next_url = request.GET.get("next", '/')
+                    if user_instance.user_type == "Doctor":
+                        next_url = request.GET.get("next", '/doctor')
+                    else:
+                        next_url = request.GET.get("next", '/')
                     return redirect(next_url)
                 else:
                     messages.error(request, "wrong User Name Or Password")

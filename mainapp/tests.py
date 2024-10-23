@@ -1,11 +1,13 @@
-from django.test import TestCase
+from django.test import TestCase, SimpleTestCase
 from django.urls import reverse, resolve
 from django.contrib.auth.models import User
-from mainapp.models import MedicalRecord
+from mainapp.models import MedicalRecord, Appointment
+from patientapp.models import Patient
 
 
 class MainAppModelTest(TestCase):
     def setUp(self):
+        self.user = User.objects.create(username="testuser")
         self.patient = Patient.objects.create(full_name="John Doe")
         self.medical_record = MedicalRecord.objects.create(patient=self.patient)
 
@@ -14,8 +16,12 @@ class MainAppModelTest(TestCase):
 
 class MainAppViewTest(TestCase):
     def setUp(self):
-        self.patient = Patient.objects.create(full_name="John Doe")
+        self.user = User.objects.create(username="testuser")
+        self.patient = Patient.objects.create(full_name="John Doe", User=self.user)
         self.medical_record = MedicalRecord.objects.create(patient=self.patient)
+
+    def test_medical_record_str(self):
+        self.assertEqual(str(self.patient), "John Doe")
 
     def test_medical_record_list_view(self):
         response = self.client.get(reverse('medical_record_list'))
@@ -29,7 +35,7 @@ class MainAppFormTest(TestCase):
             'date': '2024-10-18',
             'time': '14:00',
         }
-        form = Appointment(data=data)
+        form = Appointment(data)
         self.assertTrue(form.is_valid())
 
 class MainAppUrlTest(SimpleTestCase):
